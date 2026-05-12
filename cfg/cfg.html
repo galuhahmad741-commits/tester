@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CFG Checker</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      text-align: center;
+      padding-top: 50px;
+    }
+
+    .container {
+      background: white;
+      width: 400px;
+      margin: auto;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+    }
+
+    input {
+      width: 80%;
+      padding: 10px;
+      margin-top: 15px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 15px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #hasil {
+      margin-top: 20px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .diterima {
+      color: green;
+    }
+
+    .ditolak {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Bahasa Bebas Konteks</h2>
+
+    <p>Grammar:</p>
+    <p><b>S → aSb | ab</b></p>
+
+    <input type="text" id="inputString" placeholder="Masukkan string">
+
+    <br>
+
+    <button onclick="cekCFG()">Cek</button>
+
+    <div id="hasil"></div>
+  </div>
+
+  <script>
+    function cekCFG() {
+
+      let str = document.getElementById("inputString").value;
+
+      let jumlahA = 0;
+      let jumlahB = 0;
+      let i = 0;
+
+      // Hitung huruf a
+      while (i < str.length && str[i] === 'a') {
+        jumlahA++;
+        i++;
+      }
+
+      // Hitung huruf b
+      while (i < str.length && str[i] === 'b') {
+        jumlahB++;
+        i++;
+      }
+
+      let hasil = document.getElementById("hasil");
+
+      // Validasi CFG
+      if (
+        i === str.length &&
+        jumlahA === jumlahB &&
+        jumlahA > 0
+      ) {
+        hasil.innerHTML = "DITERIMA";
+        hasil.className = "diterima";
+      } else {
+        hasil.innerHTML = "DITOLAK";
+        hasil.className = "ditolak";
+      }
+    }
+  </script>
+
+</body>
+</html>
